@@ -5,7 +5,7 @@ export async function createCard(req: Request, res: Response) {
     const headers = req.headers;
     const body = req.body;
     const { apikey } = headers;
-    const { employeeId, password, isVirtual, originalCardId, isBlocked ,type } = body;
+    const { employeeId, isVirtual, isBlocked ,type } = body;
 
     await cardServices.checkApiKey(apikey)
     await cardServices.checkEmployeeId(employeeId);
@@ -23,14 +23,32 @@ export async function createCard(req: Request, res: Response) {
         cardholderName,
         securityCode: hiddenSecurityCode,
         expirationDate,
-        password,
+        password: null,
         isVirtual,
-        originalCardId,
+        originalCardId: null,
         isBlocked,
         type
     }
 
     await cardServices.insertCard(newCard);
 
-    return res.status(201).send('Created.');
+    return res.status(201).send({
+        number: cardNumber,
+        cardholderName,
+        expirationDate,
+        securityCode
+    });
+}
+
+export async function activateCard(req: Request, res: Response){
+    //receber id pelo req.params
+    //receber cvc e password pelo req.body
+    //a senha deve ter 4 números
+    //verificar se existe um cadastro de cartão com esse id
+    //verificar se o cartão não expirou
+    //verificar se o cartão já tem senha cadastrada
+    //criptografar a senha
+    //registrar a senha
+    
+    return res.status(200).send('ok')
 }
