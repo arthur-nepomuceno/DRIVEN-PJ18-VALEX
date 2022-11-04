@@ -60,29 +60,93 @@ export async function checkCardType(type: string | any, employeeId: number) {
 }
 
 export async function setCardNumber() {
-    const n1 = faker.datatype.number({min: 1000, max: 9999});
-    const n2 = faker.datatype.number({min: 1000, max: 9999});
-    const n3 = faker.datatype.number({min: 1000, max: 9999});
-    const n4 = faker.datatype.number({min: 1000, max: 9999});
-    
+    const n1 = faker.datatype.number({ min: 1000, max: 9999 });
+    const n2 = faker.datatype.number({ min: 1000, max: 9999 });
+    const n3 = faker.datatype.number({ min: 1000, max: 9999 });
+    const n4 = faker.datatype.number({ min: 1000, max: 9999 });
+
     return `${n1}` + `${n2}` + `${n3}` + `${n4}`;
 }
 
 export async function setExpirationDate() {
     const date = dayjs().add(5, 'years').format('MM/YY');
     return date;
- }
+}
 
 export async function setSecurityCode() {
-    const cvc = faker.datatype.number({min: 100, max: 999});
+    const cvc = faker.datatype.number({ min: 100, max: 999 });
     return cvc;
 }
 
-export async function hideSecurityCode(cvc: string) {
+export async function hideData(data: string) {
     const cryptr = new Cryptr(process.env.SECRET_KEY);
-    return cryptr.encrypt(cvc);
- }
+    return cryptr.encrypt(data);
+}
+
+export async function showData(data: string) {
+    const cryptr = new Cryptr(process.env.SECRET_KEY);
+    return cryptr.decrypt(data);
+}
 
 export async function insertCard(object: CardInsertData) {
     return await cardsRepository.insert(object);
+}
+
+export async function checkCardId(id: number) {
+    const response = await cardsRepository.findById(id);
+
+    if (!response) throw {
+        type: "invalid_card_id",
+        message: "_this card does not exist_"
+    }
+
+    return;
+}
+
+export async function checkCardExpirationDate(id: number) {
+    const response = await cardsRepository.findById(id);
+    const { expirationDate } = response;
+
+    const currentMonth = Number(dayjs().format('MM/YY').split('/')[0]);
+    const currentYear = Number(dayjs().format('MM/YY').split('/')[1]);
+    const expirationMonth = Number(expirationDate.split('/')[0]);
+    const expirationYear = Number(expirationDate.split('/')[1]);
+
+    if (currentYear > expirationYear) throw {
+        type: "card_expired",
+        message: "_this card has already expired_"
+    }
+
+    if (currentYear === expirationYear && currentMonth > expirationMonth) throw {
+        type: "card_expired",
+        message: "_this card has already expired_"
+    }
+
+    return;
+}
+
+export async function checkIfCardIsActive(id: number) {
+    const response = await cardsRepository.findById(id);
+    const { password } = response;
+    if (password) throw {
+        type: "active_card",
+        message: "_this card is already active_"
+    }
+}
+
+export async function checkSecurityCode(id: number, securityCode: number) {
+    const response = await cardsRepository.findById(id);
+
+    const showSecurityCode = await showData(response.securityCode);
+
+    if(Number(showSecurityCode) !== securityCode) throw {
+        type: "invalid_security_code",
+        message: "_the security code you are supplying does not match our database_"
+    }
+
+    return;
+}
+
+export async function activateCard(id: number, password: string) {
+
 }
