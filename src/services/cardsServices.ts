@@ -139,7 +139,7 @@ export async function checkSecurityCode(id: number, securityCode: number) {
 
     const showSecurityCode = await showData(response.securityCode);
 
-    if(Number(showSecurityCode) !== securityCode) throw {
+    if (Number(showSecurityCode) !== securityCode) throw {
         type: "invalid_security_code",
         message: "_the security code you are supplying does not match our database_"
     }
@@ -149,4 +149,5 @@ export async function checkSecurityCode(id: number, securityCode: number) {
 
 export async function activateCard(id: number, password: string) {
 
+    return await cardsRepository.update(id, { password, isBlocked: false })
 }

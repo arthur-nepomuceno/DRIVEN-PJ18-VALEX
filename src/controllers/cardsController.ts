@@ -50,7 +50,7 @@ export async function activateCard(req: Request, res: Response) {
     await cardServices.checkSecurityCode(Number(id), Number(securityCode));
     
     const hiddenPassword = await cardServices.hideData(password);
-    // await cardServices.activateCard(hiddenPassword);
+    await cardServices.activateCard(Number(id), hiddenPassword);
 
-    return res.status(200).send(hiddenPassword);
+    return res.status(200).send('Activated.');
 }
