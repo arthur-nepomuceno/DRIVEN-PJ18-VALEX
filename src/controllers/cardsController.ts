@@ -5,17 +5,17 @@ export async function createCard(req: Request, res: Response) {
     const headers = req.headers;
     const body = req.body;
     const { apikey } = headers;
-    const { employeeId, password, isVirtual, originalCardId, isBlocked ,type } = body;
+    const { employeeId, isVirtual, isBlocked, type } = body;
 
     await cardServices.checkApiKey(apikey)
     await cardServices.checkEmployeeId(employeeId);
     await cardServices.checkCardType(type, employeeId);
-    
+
     const cardNumber = await cardServices.setCardNumber();
     const cardholderName = await cardServices.setCardHolderName(employeeId);
     const expirationDate = await cardServices.setExpirationDate();
     const securityCode = await cardServices.setSecurityCode();
-    const hiddenSecurityCode = await cardServices.hideSecurityCode(`${securityCode}`);
+    const hiddenSecurityCode = await cardServices.hideData(`${securityCode}`);
 
     const newCard = {
         number: cardNumber,
@@ -23,14 +23,34 @@ export async function createCard(req: Request, res: Response) {
         cardholderName,
         securityCode: hiddenSecurityCode,
         expirationDate,
-        password,
+        password: null,
         isVirtual,
-        originalCardId,
+        originalCardId: null,
         isBlocked,
         type
     }
 
     await cardServices.insertCard(newCard);
 
-    return res.status(201).send('Created.');
+    return res.status(201).send({
+        number: cardNumber,
+        cardholderName,
+        expirationDate,
+        securityCode
+    });
+}
+
+export async function activateCard(req: Request, res: Response) {
+    const { id } = req.params;
+    const { securityCode, password } = req.body;
+
+    await cardServices.checkCardId(Number(id));
+    await cardServices.checkCardExpirationDate(Number(id));
+    await cardServices.checkIfCardIsActive(Number(id));
+    await cardServices.checkSecurityCode(Number(id), Number(securityCode));
+    
+    const hiddenPassword = await cardServices.hideData(password);
+    await cardServices.activateCard(Number(id), hiddenPassword);
+
+    return res.status(200).send('Activated.');
 }
