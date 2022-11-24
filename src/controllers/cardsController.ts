@@ -54,3 +54,11 @@ export async function activateCard(req: Request, res: Response) {
 
     return res.status(200).send('Activated.');
 }
+
+export async function viewEmployeeCards(req: Request, res: Response) {
+    const {id} = req.body;
+
+    const list = await cardServices.viewEmployeeCards(Number(id))
+
+    return res.status(200).send(list);
+}
