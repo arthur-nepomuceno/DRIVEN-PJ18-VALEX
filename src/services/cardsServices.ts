@@ -151,3 +151,21 @@ export async function activateCard(id: number, password: string) {
 
     return await cardsRepository.update(id, { password, isBlocked: false })
 }
+
+export async function viewEmployeeCards(id: number) {
+    const response = await cardsRepository.findCardsByEmployeeId(id);
+    const cards = [];
+    for (let i = 0; i < response.rows.length; i++) {
+        const element = response.rows[i];
+        const { number, cardholderName, expirationDate, securityCode, isBlocked, isVirtual } = element;
+        cards.push({
+            number,
+            cardholderName,
+            expirationDate,
+            securityCode: await showData(securityCode),
+            isBlocked,
+            isVirtual
+        })
+    }
+    return {cards}
+}

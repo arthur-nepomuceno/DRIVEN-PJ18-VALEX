@@ -122,3 +122,7 @@ export async function update(id: number, cardData: CardUpdateData) {
 export async function remove(id: number) {
   connection.query<any, [number]>("DELETE FROM cards WHERE id=$1", [id]);
 }
+
+export async function findCardsByEmployeeId(id: number) {
+  return await connection.query<Card>(`SELECT * FROM cards WHERE "employeeId" = $1`, [id])
+}
