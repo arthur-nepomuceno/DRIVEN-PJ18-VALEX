@@ -15,3 +15,7 @@ export const activateSchema = Joi.object({
 export const viewCardSchema = Joi.object({
     id: Joi.number().required()
 })
+
+export const getBalanceSchema = Joi.object({
+    cardId: Joi.number().required()
+})

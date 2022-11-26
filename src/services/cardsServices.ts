@@ -1,6 +1,8 @@
 import * as cardsRepository from "../repositories/cardRepository";
 import * as employeeRepository from "../repositories/employeeRepository";
 import * as companyRepository from "../repositories/companyRepository";
+import * as paymentRepository from "../repositories/paymentRepository";
+import * as rechargeRepository from "../repositories/rechargeRepository";
 import { CardInsertData } from "../repositories/cardRepository";
 import { faker } from "@faker-js/faker";
 import dayjs from "dayjs";
@@ -168,4 +170,9 @@ export async function viewEmployeeCards(id: number) {
         })
     }
     return {cards}
+}
+
+export async function getCardBalance(id: number) {
+    const payments = await paymentRepository.findByCardId(id);
+    const recharges = await rechargeRepository.findByCardId(id);
 }
