@@ -169,10 +169,41 @@ export async function viewEmployeeCards(id: number) {
             isVirtual
         })
     }
-    return {cards}
+    return { cards }
 }
 
 export async function getCardBalance(id: number) {
     const payments = await paymentRepository.findByCardId(id);
     const recharges = await rechargeRepository.findByCardId(id);
+
+    return { balance: '', transactions: payments, recharges };
+}
+
+export async function checkIfCardIsBlocked(id: number) {
+    const { isBlocked } = await cardsRepository.findById(id);
+
+    if (isBlocked) throw {
+        type: "blocked_card",
+        message: "_this card is already blocked_"
+    }
+
+    return;
+}
+
+export async function checkPassword(id: number, password: string) {
+    const card = await cardsRepository.findById(id)
+
+    const truePassword = await showData(card.password);
+
+    if(password != truePassword) throw {
+        type: "invalid_password",
+        message: "_the password you are using is invalid_"
+    }
+
+    return;
+}
+
+export async function blockCard(id: number) {
+    await cardsRepository.update(id, {isBlocked: true});
+    return;
 }
