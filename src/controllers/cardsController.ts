@@ -48,7 +48,7 @@ export async function activateCard(req: Request, res: Response) {
     await cardServices.checkCardExpirationDate(Number(id));
     await cardServices.checkIfCardIsActive(Number(id));
     await cardServices.checkSecurityCode(Number(id), Number(securityCode));
-    
+
     const hiddenPassword = await cardServices.hideData(password);
     await cardServices.activateCard(Number(id), hiddenPassword);
 
@@ -56,9 +56,25 @@ export async function activateCard(req: Request, res: Response) {
 }
 
 export async function viewEmployeeCards(req: Request, res: Response) {
-    const {id} = req.body;
+    const { id } = req.body;
 
     const list = await cardServices.viewEmployeeCards(Number(id))
 
     return res.status(200).send(list);
+}
+
+export async function getCardBalance(req: Request, res: Response) {
+    const { id } = req.body;
+    const response = await cardServices.getCardBalance(id)
+    return res.status(200).send(response)
+}
+
+export async function blockCardById(req: Request, res: Response) {
+    const { cardId, password } = req.body;
+    await cardServices.checkCardId(cardId);
+    await cardServices.checkCardExpirationDate(cardId);
+    await cardServices.checkIfCardIsBlocked(cardId);
+    await cardServices.checkPassword(cardId, password);
+    await cardServices.blockCard(cardId);
+    return res.status(200).send(`Card with id '${cardId}' blocked successfully.`)
 }
