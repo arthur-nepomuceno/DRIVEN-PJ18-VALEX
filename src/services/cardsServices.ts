@@ -179,17 +179,6 @@ export async function getCardBalance(id: number) {
     return { balance: '', transactions: payments, recharges };
 }
 
-export async function checkIfCardIsBlocked(id: number) {
-    const { isBlocked } = await cardsRepository.findById(id);
-
-    if (isBlocked) throw {
-        type: "blocked_card",
-        message: "_this card is already blocked_"
-    }
-
-    return;
-}
-
 export async function checkPassword(id: number, password: string) {
     const card = await cardsRepository.findById(id)
 
@@ -203,7 +192,34 @@ export async function checkPassword(id: number, password: string) {
     return;
 }
 
+export async function checkIfCardIsBlocked(id: number) {
+    const { isBlocked } = await cardsRepository.findById(id);
+
+    if (isBlocked) throw {
+        type: "blocked_card",
+        message: "_this card is already blocked_"
+    }
+
+    return;
+}
+
 export async function blockCard(id: number) {
     await cardsRepository.update(id, {isBlocked: true});
+    return;
+}
+
+export async function checkIfCardIsUnblocked(id: number) {
+    const { isBlocked } = await cardsRepository.findById(id);
+
+    if (!isBlocked) throw {
+        type: "unblocked_card",
+        message: "_this card is already unblocked_"
+    }
+
+    return;
+}
+
+export async function unblockCard(id: number) {
+    await cardsRepository.update(id, {isBlocked: false});
     return;
 }

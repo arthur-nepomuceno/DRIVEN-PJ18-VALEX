@@ -16,8 +16,9 @@ export function errorHandler(error: Error | any, req: Request, res: Response, ne
     if (type === "card_expired") return res.status(status.not_acceptable).send(message);
     if (type === "active_card") return res.status(status.not_acceptable).send(message);
     if (type === "invalid_security_code") return res.status(status.not_acceptable).send(message);
-    if (type === "blocked_card") return res.status(status.not_acceptable).send(message);
     if (type === "invalid_password") return res.status(status.not_acceptable).send(message);
+    if (type === "blocked_card") return res.status(status.not_acceptable).send(message);
+    if (type === "unblocked_card") return res.status(status.not_acceptable).send(message);
 
     return res.status(500).send(`Unexpected server error: ${error}.`)
 }
