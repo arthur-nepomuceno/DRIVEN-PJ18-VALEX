@@ -78,3 +78,13 @@ export async function blockCardById(req: Request, res: Response) {
     await cardServices.blockCard(cardId);
     return res.status(200).send(`Card with id '${cardId}' blocked successfully.`)
 }
+
+export async function unblockCardById(req: Request, res: Response) {
+    const { cardId, password } = req.body;
+    await cardServices.checkCardId(cardId);
+    await cardServices.checkCardExpirationDate(cardId);
+    await cardServices.checkIfCardIsUnblocked(cardId);
+    await cardServices.checkPassword(cardId, password);
+    await cardServices.unblockCard(cardId);
+    return res.status(200).send(`Card with id '${cardId}' unblocked successfully.`)
+}
