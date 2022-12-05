@@ -19,3 +19,8 @@ export const viewCardSchema = Joi.object({
 export const getBalanceSchema = Joi.object({
     cardId: Joi.number().required()
 })
+
+export const rechargeSchema = Joi.object({
+    cardId: Joi.number().required(),
+    rechargeValue: Joi.number().min(0.01).required()
+})
