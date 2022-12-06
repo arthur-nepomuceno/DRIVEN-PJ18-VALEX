@@ -129,10 +129,19 @@ export async function checkCardExpirationDate(id: number) {
 
 export async function checkIfCardIsActive(id: number) {
     const response = await cardsRepository.findById(id);
-    const { password } = response;
-    if (password) throw {
+    if (response.password) throw {
         type: "active_card",
         message: "_this card is already active_"
+    }
+    
+    return;
+}
+
+export async function checkIfCardIsUnactive(id: number) {
+    const response = await cardsRepository.findById(id);
+    if (!response.password) throw {
+        type: "unactive_card",
+        message: "_this card is unactive_"
     }
 }
 
@@ -175,8 +184,16 @@ export async function viewEmployeeCards(id: number) {
 export async function getCardBalance(id: number) {
     const payments = await paymentRepository.findByCardId(id);
     const recharges = await rechargeRepository.findByCardId(id);
+    
+    let balance: number = 0;
+    for(let i = 0; i < recharges.length; i++){
+        balance += recharges[i].amount;
+    }
+    for(let i = 0; i < payments.length; i++){
+        balance -= payments[i].amount;
+    }
 
-    return { balance: '', transactions: payments, recharges };
+    return { balance, transactions: payments, recharges };
 }
 
 export async function checkPassword(id: number, password: string) {
@@ -184,7 +201,7 @@ export async function checkPassword(id: number, password: string) {
 
     const truePassword = await showData(card.password);
 
-    if(password != truePassword) throw {
+    if (password != truePassword) throw {
         type: "invalid_password",
         message: "_the password you are using is invalid_"
     }
@@ -204,7 +221,7 @@ export async function checkIfCardIsBlocked(id: number) {
 }
 
 export async function blockCard(id: number) {
-    await cardsRepository.update(id, {isBlocked: true});
+    await cardsRepository.update(id, { isBlocked: true });
     return;
 }
 
@@ -220,6 +237,12 @@ export async function checkIfCardIsUnblocked(id: number) {
 }
 
 export async function unblockCard(id: number) {
-    await cardsRepository.update(id, {isBlocked: false});
+    await cardsRepository.update(id, { isBlocked: false });
+    return;
+}
+
+export async function rechargeCardById(cardId: number, amount: number) {
+    const rechargeData = { cardId, amount };
+    await rechargeRepository.insert(rechargeData);
     return;
 }

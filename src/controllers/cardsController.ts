@@ -64,8 +64,10 @@ export async function viewEmployeeCards(req: Request, res: Response) {
 }
 
 export async function getCardBalance(req: Request, res: Response) {
-    const { id } = req.body;
-    const response = await cardServices.getCardBalance(id)
+    const { cardId } = req.body;
+    await cardServices.checkIfCardIsUnactive(cardId);
+    await cardServices.checkCardExpirationDate(cardId);
+    const response = await cardServices.getCardBalance(cardId)
     return res.status(200).send(response)
 }
 
@@ -95,6 +97,9 @@ export async function rechargeCard(req: Request, res: Response) {
 
     await cardServices.checkApiKey(apikey);
     await cardServices.checkCardId(cardId);
+    await cardServices.checkIfCardIsUnactive(cardId);
+    await cardServices.checkCardExpirationDate(cardId);
+    await cardServices.rechargeCardById(cardId, rechargeValue);
 
-    return res.status(200).send(apikey)
+    return res.status(200).send(`Recharge of $${rechargeValue} done successfully.`)
 }
