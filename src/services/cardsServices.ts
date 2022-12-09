@@ -3,6 +3,7 @@ import * as employeeRepository from "../repositories/employeeRepository";
 import * as companyRepository from "../repositories/companyRepository";
 import * as paymentRepository from "../repositories/paymentRepository";
 import * as rechargeRepository from "../repositories/rechargeRepository";
+import * as businessRepository from "../repositories/businessRepository";
 import { CardInsertData } from "../repositories/cardRepository";
 import { faker } from "@faker-js/faker";
 import dayjs from "dayjs";
@@ -133,7 +134,7 @@ export async function checkIfCardIsActive(id: number) {
         type: "active_card",
         message: "_this card is already active_"
     }
-    
+
     return;
 }
 
@@ -143,6 +144,8 @@ export async function checkIfCardIsUnactive(id: number) {
         type: "unactive_card",
         message: "_this card is unactive_"
     }
+
+    return;
 }
 
 export async function checkSecurityCode(id: number, securityCode: number) {
@@ -184,12 +187,12 @@ export async function viewEmployeeCards(id: number) {
 export async function getCardBalance(id: number) {
     const payments = await paymentRepository.findByCardId(id);
     const recharges = await rechargeRepository.findByCardId(id);
-    
+
     let balance: number = 0;
-    for(let i = 0; i < recharges.length; i++){
+    for (let i = 0; i < recharges.length; i++) {
         balance += recharges[i].amount;
     }
-    for(let i = 0; i < payments.length; i++){
+    for (let i = 0; i < payments.length; i++) {
         balance -= payments[i].amount;
     }
 
@@ -244,5 +247,30 @@ export async function unblockCard(id: number) {
 export async function rechargeCardById(cardId: number, amount: number) {
     const rechargeData = { cardId, amount };
     await rechargeRepository.insert(rechargeData);
+    return;
+}
+
+export async function checkCardAndBusinessTypes(cardId: number, businessId: number) {
+    const card = await cardsRepository.findById(cardId);
+    const business = await businessRepository.findById(businessId);
+
+    if (card.type !== business.type) throw {
+        type: "invalid_card_and_business_types",
+        message: "_this type of card does not match this establishment type_"
+    }
+
+    return;
+}
+
+export async function checkCardBalance(cardId: number, paymentValue: number) {
+    const cardBalance = await getCardBalance(cardId);
+
+    if (cardBalance.balance < paymentValue) throw {
+        type: "not_enough_money",
+        message: "_you do not have enough money to make this purchase_"
+    }
+}
+
+export async function makePayment(cardId: number, businessId: number, paymentValue: number) {
     return;
 }

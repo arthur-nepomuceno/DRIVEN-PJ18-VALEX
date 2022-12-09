@@ -5,7 +5,8 @@ import {
     activateSchema,
     viewCardSchema,
     getBalanceSchema,
-    rechargeSchema
+    rechargeSchema,
+    paymentSchema
 } from "../schemas/cardSchema";
 import {
     createCard,
@@ -14,7 +15,8 @@ import {
     getCardBalance,
     blockCard,
     unblockCard,
-    rechargeCard
+    rechargeCard,
+    makePayment
 } from "../controllers/cardsController";
 
 export const cardsRouter = Router();
@@ -26,3 +28,4 @@ cardsRouter.get('/cards/balance', checkSchema(getBalanceSchema), getCardBalance)
 cardsRouter.put('/block', blockCard)
 cardsRouter.put('/unblock', unblockCard)
 cardsRouter.post('/recharge', checkSchema(rechargeSchema) ,rechargeCard)
+cardsRouter.post('/payment', checkSchema(paymentSchema) ,makePayment)
