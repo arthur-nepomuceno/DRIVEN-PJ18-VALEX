@@ -285,3 +285,7 @@ export async function getOriginalCardData(cardId: number){
         type
     }
 }
+
+export async function deleteCardById(cardId: number) {
+    return await cardsRepository.remove(cardId);
+}
