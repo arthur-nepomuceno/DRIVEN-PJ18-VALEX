@@ -116,8 +116,7 @@ export async function makePayment(req: Request, res: Response) {
     await businessServices.checkBusinessId(businessId);
     await cardServices.checkCardAndBusinessTypes(cardId, businessId);
     await cardServices.checkCardBalance(cardId, paymentValue);
-    //registrar a compra no banco de dados
+    await cardServices.makePayment(cardId, businessId, paymentValue);
 
-
-    return res.status(200).send('payment ok')
+    return res.status(200).send(`Payment of $${paymentValue} done successfully .`)
 }

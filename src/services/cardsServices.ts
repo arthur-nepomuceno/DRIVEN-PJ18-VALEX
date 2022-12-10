@@ -272,5 +272,6 @@ export async function checkCardBalance(cardId: number, paymentValue: number) {
 }
 
 export async function makePayment(cardId: number, businessId: number, paymentValue: number) {
+    await paymentRepository.insert({cardId, businessId, amount: paymentValue});
     return;
 }
