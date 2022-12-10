@@ -31,3 +31,8 @@ export const paymentSchema = Joi.object({
     businessId: Joi.number().required(),
     paymentValue: Joi.number().min(0.01).required(),
 })
+
+export const virtualCardSchema = Joi.object({
+    cardId: Joi.number().required(),
+    password: Joi.number().required()
+})

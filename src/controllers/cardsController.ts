@@ -125,12 +125,12 @@ export async function createVirtualCard(req: Request, res: Response) {
 
     const { cardId, password } = req.body;
 
-    await cardServices.checkPassword(cardId, password);
     await cardServices.checkCardId(cardId);
+    await cardServices.checkPassword(cardId, password);
     const {
-        employeeId, 
+        employeeId,
         cardholderName,
-        expirationDate, 
+        expirationDate,
         type
     } = await cardServices.getOriginalCardData(cardId);
 
@@ -151,7 +151,7 @@ export async function createVirtualCard(req: Request, res: Response) {
         isBlocked: false,
         type
     }
-    
+
     await cardServices.insertCard(newVirtualCard);
 
     return res.status(201).send({
@@ -160,4 +160,14 @@ export async function createVirtualCard(req: Request, res: Response) {
         expirationDate,
         securityCode
     });
+}
+
+export async function deleteVirtualCard(req: Request, res: Response) {
+    const { cardId, password } = req.body;
+
+    await cardServices.checkCardId(cardId);
+    await cardServices.checkPassword(cardId, password);
+    await cardServices.deleteCardById(cardId);
+
+    return res.status(200).send(`Virtual card with id ${cardId} deleted successfully.`)
 }
