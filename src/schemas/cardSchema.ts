@@ -24,3 +24,10 @@ export const rechargeSchema = Joi.object({
     cardId: Joi.number().required(),
     rechargeValue: Joi.number().min(0.01).required()
 })
+
+export const paymentSchema = Joi.object({
+    cardId: Joi.number().required(),
+    password: Joi.number().required(),
+    businessId: Joi.number().required(),
+    paymentValue: Joi.number().min(0.01).required(),
+})

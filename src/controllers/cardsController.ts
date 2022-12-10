@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as cardServices from "../services/cardsServices";
+import * as businessServices from "../services/businessServices";
 
 export async function createCard(req: Request, res: Response) {
     const headers = req.headers;
@@ -102,4 +103,20 @@ export async function rechargeCard(req: Request, res: Response) {
     await cardServices.rechargeCardById(cardId, rechargeValue);
 
     return res.status(200).send(`Recharge of $${rechargeValue} done successfully.`)
+}
+
+export async function makePayment(req: Request, res: Response) {
+    const {cardId, password, businessId, paymentValue} = req.body;
+    
+    await cardServices.checkCardId(cardId);
+    await cardServices.checkIfCardIsUnactive(cardId);
+    await cardServices.checkCardExpirationDate(cardId);
+    await cardServices.checkIfCardIsBlocked(cardId);
+    await cardServices.checkPassword(cardId, password);
+    await businessServices.checkBusinessId(businessId);
+    await cardServices.checkCardAndBusinessTypes(cardId, businessId);
+    await cardServices.checkCardBalance(cardId, paymentValue);
+    await cardServices.makePayment(cardId, businessId, paymentValue);
+
+    return res.status(200).send(`Payment of $${paymentValue} done successfully .`)
 }
