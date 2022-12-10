@@ -275,3 +275,13 @@ export async function makePayment(cardId: number, businessId: number, paymentVal
     await paymentRepository.insert({cardId, businessId, amount: paymentValue});
     return;
 }
+
+export async function getOriginalCardData(cardId: number){
+    const {employeeId, cardholderName, expirationDate, type} = await cardsRepository.findById(cardId);
+    return {
+        employeeId,
+        cardholderName,
+        expirationDate,
+        type
+    }
+}

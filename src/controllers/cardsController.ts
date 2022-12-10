@@ -106,8 +106,8 @@ export async function rechargeCard(req: Request, res: Response) {
 }
 
 export async function makePayment(req: Request, res: Response) {
-    const {cardId, password, businessId, paymentValue} = req.body;
-    
+    const { cardId, password, businessId, paymentValue } = req.body;
+
     await cardServices.checkCardId(cardId);
     await cardServices.checkIfCardIsUnactive(cardId);
     await cardServices.checkCardExpirationDate(cardId);
@@ -119,4 +119,45 @@ export async function makePayment(req: Request, res: Response) {
     await cardServices.makePayment(cardId, businessId, paymentValue);
 
     return res.status(200).send(`Payment of $${paymentValue} done successfully .`)
+}
+
+export async function createVirtualCard(req: Request, res: Response) {
+
+    const { cardId, password } = req.body;
+
+    await cardServices.checkPassword(cardId, password);
+    await cardServices.checkCardId(cardId);
+    const {
+        employeeId, 
+        cardholderName,
+        expirationDate, 
+        type
+    } = await cardServices.getOriginalCardData(cardId);
+
+    const cardNumber = await cardServices.setCardNumber();
+    const securityCode = await cardServices.setSecurityCode();
+    const hiddenSecurityCode = await cardServices.hideData(`${securityCode}`);
+    const hiddenPassword = await cardServices.hideData(password)
+
+    const newVirtualCard = {
+        number: cardNumber,
+        employeeId,
+        cardholderName,
+        securityCode: hiddenSecurityCode,
+        expirationDate,
+        password: hiddenPassword,
+        isVirtual: true,
+        originalCardId: cardId,
+        isBlocked: false,
+        type
+    }
+    
+    await cardServices.insertCard(newVirtualCard);
+
+    return res.status(201).send({
+        number: cardNumber,
+        cardholderName,
+        expirationDate,
+        securityCode
+    });
 }
