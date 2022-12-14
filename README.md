@@ -10,19 +10,44 @@
 
 
 ##  :clipboard: Apresentação
-   :construction: ... em construção ... :construction:
+   Este projeto se trata de uma API de cartões. O Valex torna possível que colaboradores de uma empresa tenham cartões de benefícios, físicos e virtuais, para utilizar nos estabelecimentos cadastrados na rede de opções e para compras online.
 
 ***
 
 ##  :clipboard: Introdução
-
+   Este é um projeto desenvolvido em TypeScript e com um banco de dados previamente construído. Seus elementos são:
+   - _companies_: tabela com as empresas as quais pertecem os colaboradores. Cada empresa deve possuir uma chave de registro que a possibilita realizar as demais operações necessárias.
+   - _employees_: tabela de colaboradores associados à empresa. Um colaborador pode ter mais de um cartão.
+   - _cards_: tabela de cartões, que podem ser físicos e virtuais, variando em tipo de estabelecimento onde podem ser utilizados.
+   - _payments_: tabela de registros de pagamentos.
+   - _recharges_: tabela de registros de recargas.
+   - _businesses_: tabela para cadastro dos establecimentos que aceitam os cartões da empresa.
+   
 ***
 
 ## :computer:	Conceitos & Tecnologias 
-
+   :construction: ... em construção ... :construction:
 ***
 
 ## 🏁 Rodando a aplicação
+Este projeto foi inicializado com o Node Package Manager, então certifique-se que voce tem a ultima versão estável do [Node.js](https://nodejs.org/en/download/) e [npm](https://www.npmjs.com/) rodando localmente.
+
+Primeiro, faça o clone desse repositório na sua maquina:
+
+```
+git clone https://github.com/arthur-nepomuceno/pj18-valex.git
+```
+
+Depois, dentro da pasta, rode o seguinte comando para instalar as dependencias.
+
+```
+npm install
+```
+
+Finalizado o processo, é só inicializar o servidor
+```
+npm run dev
+```
 
 ***
 
