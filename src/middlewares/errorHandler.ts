@@ -23,6 +23,7 @@ export function errorHandler(error: Error | any, req: Request, res: Response, ne
     if (type === "invalid_business_id") return res.status(status.not_found).send(message);
     if (type === "invalid_card_and_business_types") return res.status(status.not_acceptable).send(message);
     if (type === "not_enough_money") return res.status(status.not_acceptable).send(message);
+    if (type === "virtual_card") return res.status(status.not_acceptable).send(message);
 
     return res.status(500).send(`Unexpected server error: ${error}.`)
 }
