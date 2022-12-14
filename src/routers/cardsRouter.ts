@@ -19,7 +19,8 @@ import {
     rechargeCard,
     makePayment,
     createVirtualCard,
-    deleteVirtualCard
+    deleteVirtualCard,
+    makeOnlinePayment
 } from "../controllers/cardsController";
 
 export const cardsRouter = Router();
@@ -33,4 +34,5 @@ cardsRouter.put('/unblock', unblockCard);
 cardsRouter.post('/recharge', checkSchema(rechargeSchema), rechargeCard);
 cardsRouter.post('/payment', checkSchema(paymentSchema), makePayment);
 cardsRouter.post('/virtual-card', checkSchema(virtualCardSchema), createVirtualCard);
-cardsRouter.delete('/virtual-card', checkSchema(virtualCardSchema), deleteVirtualCard)
+cardsRouter.delete('/virtual-card', checkSchema(virtualCardSchema), deleteVirtualCard);
+cardsRouter.post('/online-payment', checkSchema(paymentSchema), makeOnlinePayment);

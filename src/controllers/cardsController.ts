@@ -46,6 +46,7 @@ export async function activateCard(req: Request, res: Response) {
     const { securityCode, password } = req.body;
 
     await cardServices.checkCardId(Number(id));
+    await cardServices.checkIfCardIsVirtual(Number(id));
     await cardServices.checkCardExpirationDate(Number(id));
     await cardServices.checkIfCardIsActive(Number(id));
     await cardServices.checkSecurityCode(Number(id), Number(securityCode));
@@ -98,6 +99,7 @@ export async function rechargeCard(req: Request, res: Response) {
 
     await cardServices.checkApiKey(apikey);
     await cardServices.checkCardId(cardId);
+    await cardServices.checkIfCardIsVirtual(cardId);
     await cardServices.checkIfCardIsUnactive(cardId);
     await cardServices.checkCardExpirationDate(cardId);
     await cardServices.rechargeCardById(cardId, rechargeValue);
@@ -109,6 +111,7 @@ export async function makePayment(req: Request, res: Response) {
     const { cardId, password, businessId, paymentValue } = req.body;
 
     await cardServices.checkCardId(cardId);
+    await cardServices.checkIfCardIsVirtual(cardId);
     await cardServices.checkIfCardIsUnactive(cardId);
     await cardServices.checkCardExpirationDate(cardId);
     await cardServices.checkIfCardIsBlocked(cardId);
@@ -170,4 +173,24 @@ export async function deleteVirtualCard(req: Request, res: Response) {
     await cardServices.deleteCardById(cardId);
 
     return res.status(200).send(`Virtual card with id ${cardId} deleted successfully.`)
+}
+
+export async function makeOnlinePayment(req: Request, res: Response) {
+    const { cardId, password, businessId, paymentValue } = req.body;
+    const { originalCardId } = await cardServices.getOriginalCardData(cardId);
+    const id: number = originalCardId ? originalCardId : cardId
+
+    await cardServices.checkCardId(cardId);
+    await cardServices.checkIfCardIsUnactive(id);
+    await cardServices.checkCardExpirationDate(cardId);
+    await cardServices.checkIfCardIsBlocked(cardId);
+    await cardServices.checkPassword(cardId, password);
+    await businessServices.checkBusinessId(businessId);
+    await cardServices.checkCardAndBusinessTypes(cardId, businessId);
+    await cardServices.checkCardBalance(id, paymentValue);
+    
+
+    await cardServices.makePayment(id, businessId, paymentValue);
+
+    return res.status(200).send(`Payment of $${paymentValue} done successfully .`)
 }

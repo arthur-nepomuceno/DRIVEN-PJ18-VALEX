@@ -272,20 +272,39 @@ export async function checkCardBalance(cardId: number, paymentValue: number) {
 }
 
 export async function makePayment(cardId: number, businessId: number, paymentValue: number) {
-    await paymentRepository.insert({cardId, businessId, amount: paymentValue});
+    await paymentRepository.insert({ cardId, businessId, amount: paymentValue });
     return;
 }
 
-export async function getOriginalCardData(cardId: number){
-    const {employeeId, cardholderName, expirationDate, type} = await cardsRepository.findById(cardId);
+export async function getOriginalCardData(cardId: number) {
+    const { 
+        employeeId, 
+        cardholderName, 
+        expirationDate, 
+        originalCardId,
+        type 
+    } = await cardsRepository.findById(cardId);
+    
     return {
         employeeId,
         cardholderName,
         expirationDate,
+        originalCardId,
         type
     }
 }
 
 export async function deleteCardById(cardId: number) {
     return await cardsRepository.remove(cardId);
+}
+
+export async function checkIfCardIsVirtual(cardId: number) {
+    const card = await cardsRepository.findById(cardId);
+    
+    if (card.isVirtual) throw {
+        type: "virtual_card",
+        message: "_you cannot proceed with a virtual card_"
+    }
+
+    return;
 }
