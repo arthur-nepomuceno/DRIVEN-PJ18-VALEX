@@ -1,8 +1,15 @@
+<p align="center">
+   <img src="https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/1f355.svg" alt="ValeX" style="width: 89px; height: 89px"/>
+</p>
+
 ## <p align = "center">  - Valex - </p>
 
 <p align = "center">
    <img src="https://img.shields.io/badge/author-Arthur Nepomuceno-093D04?style=flat-square" />
 </p>
+
+:construction: ...building... :construction:
+##### **Leia em português** >>> [![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/arthur-nepomuceno/arthur-nepomuceno/blob/main/README-pt-br.md)
 
 ## Summary
    - [Brief in](#brief-in)
