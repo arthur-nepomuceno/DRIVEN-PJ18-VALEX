@@ -10,7 +10,7 @@
 
 :construction: ...building... :construction:
 ##### **Leia em português:** 
-[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/arthur-nepomuceno/pj18-valex/blob/main/README-pt-br.md)
+[![pt-br](https://img.shields.io/badge/lang-pt--br-yellow.svg)](https://github.com/arthur-nepomuceno/pj18-valex/blob/main/README-pt-br.md)
 
 ## Summary
    - [Brief in](#brief-in)
