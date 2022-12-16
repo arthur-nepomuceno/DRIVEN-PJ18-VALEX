@@ -33,7 +33,7 @@
    
 ***
 
-## :computer:	Conceitos & Tecnologias 
+## Conceitos & Tecnologias 
    :construction: ... em construção ... :construction:
 ***
 
