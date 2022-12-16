@@ -5,8 +5,10 @@
 ## <p align = "center">  - Valex - </p>
 
 <p align = "center">
-   <img src="https://img.shields.io/badge/author-Arthur Nepomuceno-093D04?style=flat-square" />
+   <img src="https://img.shields.io/badge/autor-Arthur Nepomuceno-093D04?style=flat-square" />
 </p>
+
+##### **Read in english** >>> [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/arthur-nepomuceno/pj18-valex/blob/main/README.md)
 
 ## Sumário
    - [Apresentação](#apresentação)
