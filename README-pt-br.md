@@ -8,38 +8,38 @@
    <img src="https://img.shields.io/badge/author-Arthur Nepomuceno-093D04?style=flat-square" />
 </p>
 
-## Summary
-   - [Brief in](#brief-in)
-   - [Introduction](#introduction)
-   - [Concepts and Technologies](#concepts-and-technologies)
-   - [Running the app](#running-the-app)
-   - [End-points](#end-points)
-   - [Architecture](#architecture)
+## Sumário
+   - [Apresentação](#apresentação)
+   - [Introdução](#introdução)
+   - [Conceitos e Tecnologias](#conceitos-e-tecnologias)
+   - [Rodando a aplicação](#rodando-a-aplicação)
+   - [Rotas](#rotas)
+   - [Arquitetura](#arquitetura)
 
 ***
 
 
-## Brief in
-   This project is about an API for cards. Valex makes possible that members from a company have their benefit cards, real and virtual, to use at the establishments registered and for online shopping.
+## Apresentação
+   Este projeto se trata de uma API de cartões. O Valex torna possível que colaboradores de uma empresa tenham cartões de benefícios, físicos e virtuais, para utilizar nos estabelecimentos cadastrados na rede de opções e para compras online.
 
 ***
 
-## Introduction
-   This project is coded in TypeScripand with a database previously built. It's elements are:
-   - _companies_: table with the companies to wich the members belong. Each company must have a register key wich allows it to execute every other necessary operation.
-   - _employees_: table with the companies' members. A member may have more than one card.
-   - _cards_: table of cards, either virtual cards and real cards, varying in type os establishment where they can be used.
-   - _payments_: table with the register of all payments.
-   - _recharges_: table with the registers of all recharges.
-   - _businesses_: table to register the establishments where the cards can be used.
+## Introdução
+   Este é um projeto desenvolvido em TypeScript e com um banco de dados previamente construído. Seus elementos são:
+   - _companies_: tabela com as empresas as quais pertecem os colaboradores. Cada empresa deve possuir uma chave de registro que a possibilita realizar as demais operações necessárias.
+   - _employees_: tabela de colaboradores associados à empresa. Um colaborador pode ter mais de um cartão.
+   - _cards_: tabela de cartões, que podem ser físicos e virtuais, variando em tipo de estabelecimento onde podem ser utilizados.
+   - _payments_: tabela de registros de pagamentos.
+   - _recharges_: tabela de registros de recargas.
+   - _businesses_: tabela para cadastro dos establecimentos que aceitam os cartões da empresa.
    
 ***
 
-## Concepts and Technologies 
+## Conceitos e Tecnologias 
    :construction: ... em construção ... :construction:
 ***
 
-## Running-the-app
+## Rodando a aplicação
 Este projeto foi inicializado com o Node Package Manager, então certifique-se que voce tem a ultima versão estável do [Node.js](https://nodejs.org/en/download/) e [npm](https://www.npmjs.com/) rodando localmente.
 
 Primeiro, faça o clone desse repositório na sua maquina:
@@ -58,10 +58,10 @@ Finalizado o processo, é só inicializar o servidor
 ```
 npm run dev
 ```
-###### [back to summary](#summary)
+###### [voltar para o sumário](#sumário)
 ***
 
-## End-points
+## Rotas
 
 ```yml
 POST /cards
@@ -265,9 +265,9 @@ POST /online-payment
         }
     - response: `Payment of $30 done successfully.`
 ```
-###### [back to summary](#summary)
+###### [voltar para o sumário](#sumário)
 
-## Architecture
+## Arquitetura
 ```yml
 src
 ```
@@ -675,7 +675,7 @@ src
                 - se houver, segue adiante
             }
 ```
-###### [back to summary](#summary)
+###### [voltar para o sumário](#sumário)
 
 ```yml
     utils
