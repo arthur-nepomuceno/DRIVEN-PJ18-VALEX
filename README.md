@@ -11,7 +11,7 @@
 ## :clipboard: Sumário
    - Apresentação
    - Introdução
-   - [Conceitos & Tecnologias](#conceitos-&-tecnologias)
+   - [Conceitos e Tecnologias](#conceitos-e-tecnologias)
    - Rodando a aplicação
 
 ***
@@ -33,7 +33,7 @@
    
 ***
 
-## Conceitos & Tecnologias 
+## Conceitos e Tecnologias 
    :construction: ... em construção ... :construction:
 ***
 
