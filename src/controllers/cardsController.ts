@@ -188,7 +188,7 @@ export async function makeOnlinePayment(req: Request, res: Response) {
     await businessServices.checkBusinessId(businessId);
     await cardServices.checkCardAndBusinessTypes(cardId, businessId);
     await cardServices.checkCardBalance(id, paymentValue);
-    
+
 
     await cardServices.makePayment(id, businessId, paymentValue);
 
