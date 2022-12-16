@@ -11,7 +11,7 @@
 ## :clipboard: Sumário
    - Apresentação
    - Introdução
-   - [Conceitos e Tecnologias](#conceitos-&-tecnologias)
+   - [Conceitos & Tecnologias](#conceitos-&-tecnologias)
    - Rodando a aplicação
 
 ***
