@@ -32,7 +32,7 @@
 ***
 
 ## Introduction
-   This project is coded in TypeScripand with a database previously built. It's elements are:
+   This project is coded in TypeScript and with a database previously built. It's elements are:
    - _companies_: table with the companies to wich the members belong. Each company must have a register key wich allows it to execute every other necessary operation.
    - _employees_: table with the companies' members. A member may have more than one card.
    - _cards_: table of cards, either virtual cards and real cards, varying in type os establishment where they can be used.
