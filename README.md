@@ -478,200 +478,196 @@ src
         cardServices.ts
         
             checkApiKey(key: string | string[]){
-                - procura pela chave recebida na base de dados
-                - se não existir, retorna o erro "invalid_api_key"
-                - se existir, segue adiante
+                - searchs for the API key on the database
+                - if there is no register, it returns the error "invalid_api_key"
+                - if there is, it goes ahead
             }
 
             checkEmployeeId(employeeId: number){
-                - procura pelo id na base de dados
-                - se não existir, retorna o erro "invalid_user"
-                - se existir, segue adiante
+                - searchs for the employee's id on the database 
+                - if there is no register, it returns the error "invalid_user"
+                - if there is, it goes ahead
             }
 
             setCardHolderName(employeeId: number){
-                - procura pelo id na base de dados
-                - retorna o nome do registro no formato
-                  para ser inserido no cartão.
+                - searchs for the employee's id on the database
+                - formats and returns the name of the employee
             }
 
             checkCardType(employeeId: number, type:number){
-                - verifica se o empregado já tem um cartão do tipo que
-                  ele está tentando cadastrar
-                - se tiver, retornar o erro "unavailable_card_type"
-                - se não tiver, seguir adiante
+                - checks if the employee already has a card of this type
+                - if it does, returns the error "unavailable_card_type"
+                - if it doesn't, goes ahead
             }
 
             setCardNumber(){
-                - usa a lib faker para gerar um número aleatório de 16 dígitos
-                - retorna esse número
+                - uses faker to generate a random number of 16 digits
+                - returns this number
             }
 
             setExpirationDate(){
-                - usar a lib dayjs para pegar o mês e o ano atual
-                - gerar a expiration date, 5 anos à frente
+                - uses dayjs to get current year and month
+                - generates an expiration date, five years ahead
             }
 
             setSecurityCode() {
-                - usa a lib faker para gerar um número aleatório de 3 dígitos
-                - retorna esse número
+                - uses faker to generate a random number of 3 digits
+                - returns this number
             }
 
             hideData(data: string){
-                - usar a lib cryptr para criptografar uma informação
-                - instalação: npm i cryptr & npm i -D @types/cryptr
-                - retornar esse valor
+                - uses cryptr to encrypt a string
+                - returns the encrypted data
             }
 
             showData(data: string){
-                - usar a lib cryptr para descriptografar uma informação
-                - retornar esse valor
+                - uses cryptr to decrypt a string
+                - returns the decrypted data
             }
 
             insertCard(object: CardInsertData) {
-                - insere um novo cartão no banco de dados
+                - inserts a new card on the database
             }
     
             checkCardId(id: number) {
-                - verifica se o id é de um cartão existente
-                - se não, retorna o erro "invalid_card_id"
-                - se sim, segue adiante
+                - checks if the id is from a registered card
+                - if it is, returns the error "invalid_card_id"
+                - if it is not, goes ahead
             }
 
             checkCardExpirationDate(id: number) {
-                - encontra o cartão no banco de dados
-                - verifica se a data de expiração já venceu
-                - se sim, retorna o erro "card_expired"
-                - se não, segue adiante
+                - finds the card on the database
+                - checks if the card has expired
+                - if it has, returns the error "card_expired"
+                - if it hasn't, goes ahead
             }
 
             checkIfCardIsActive(id: number) {
-                - encontra o cartão no banco de dados
-                - verifica se ele já tem senha cadastrada
-                - se sim, retorna o erro "active_card"
-                - se nao, segue adiante
+                - finds the card on the database
+                - checks if it already has a password
+                - if it does, returns the error "active_card"
+                - if it doesn't, goes ahead
             }
 
             checkIfCardIsUnactive(id: number) {
-                - encontra o cartão no banco de dados
-                - verifica se ele já tem senha cadastrada
-                - se não, retorna o erro "unactive_card"
-                - se sim, segue adiante
+                - finds the card on the database
+                - checks if it already has a password
+                - if it doesn't, returns the error "unactive_card"
+                - if it does, goes ahead
             }
 
             checkSecurityCode(id: number, securityCode: number) {
-                - encontra o cartão no banco de dados
-                - pega o código de segurança criptografado
-                - compara ele com o código fornecido na requisição
-                - se forem diferentes, retorna o erro "invalid_security_code"
-                - se forem iguais, segue adiante
+                - finds the card on the database
+                - gets the encrypted security code
+                - compares it with the code recieved from the request
+                - if they do not match, returns the error "invalid_security_code"
+                - if they match, goes ahead
             }
 
             activateCard(id: number, password: string) {
-                - passa 2 parâmetros para a função de atualização de cartões:
+                - passes two parameters to an update cards function:
                     - id
                     - {password, isBlocked: false}
             }
 
             getEmployeeCards(id: number){
-                - passa o id do empregado como parâmetro para o repository
+                - returns all employee's cards based on employee's id
             }
 
             getCardBalance(id: number) {
-                - passa o id do cartão como parâmetro
-                - busca os pagamentos
-                - busca as recargas
-                - calcula o saldo
+                - with card's id, gets all payments and recharges registered
+                - calculates balance
+                - returns balance
             }
 
             checkPassword(id: number, password: string) {
-                - busca o registro de cartão com o id
-                - descriptografa a senha do registro
-                - compara com a senha fornecida pelo usuário
-                - se forem diferentes, retorna o erro "invalid_password"
-                - se forem iguais, segue adiante
+                - gets card's data with card's id
+                - decrypts password
+                - compares it with the given password
+                - if they do not match, it returns the error "invalid_password"
+                - if they match, goes ahead
             }
 
             checkIfCardIsBlocked(id: number) {
-                - busca o registro do cartão com o id
-                - acessa a propriedade que informa se o cartão está bloqueado
-                - se já estiver bloqueado, retorna o erro "blocked_card"
-                - se não estiver, segue adiante
+                - gets card's data with card's id
+                - checks if the card is blocked
+                - if it is, it returns the error "blocked_card"
+                - if it is not, goes ahead
             }
 
             blockCard(id: number) {
-                - mediante o id, bloqueia o cartão
+                - blocks a card with card's id
             }
 
             checkIfCardIsUnblocked(id: number) {
-                - busca o registro do cartão com o id
-                - acessa a propriedade que informa se o cartão está bloqueado
-                - se já estiver desbloqueado, retorna o erro "unblocked_card"
-                - se não estiver, segue adiante
+                - gets card's data with card's id
+                - checks if card is unblocked
+                - if it is, returns the error "unblocked_card"
+                - if it is not, goes ahead
             }
 
             unblockCard(id: number) {
-                - mediante o id, desbloqueia o cartão
+                - unblocks a card with card's id
             }
 
             rechargeCardById(cardId: number, amount: number) {
-                - recebe o id do cartão que vai receber a recarga
-                - recebe o valor de recarga
-                - realiza a recarga
+                - recieves the id of a card
+                - recieves a value for recharge
+                - makes the recharge
             }
 
             checkCardAndBusinessTypes(cardId: number, businessId: number) {
-                - busca os dados do cartão com o id
-                - busca os dados do estabelecimento com o id
-                - compara o tipo do cartão com o do estabelecimento
-                - se forem diferentes, retorna o erro "invalid_card_and_business_types"
-                - se forem iguais, segue adiante
+                - gets card's data with card's id
+                - gets business' data with business' id
+                - checks if card's type matches business' type
+                - if they do not match, returns the error "invalid_card_and_business_types"
+                - if they match, goes ahead
             }
 
             checkCardBalance(cardId: number, paymentValue: number) {
-                - com o id do cartão, calcula seu saldo
-                - compara o saldo com o valor do pagamento
-                - se for menor, retorna o erro "not_enough_money"
-                - se for maior ou igual, segue adiante
+                - with card's id, calculates it's balance
+                - compares the balance with the value of the payment
+                - if it is lower, returns the error "not_enough_money"
+                - if it is equal or higher, goes ahead
             }
 
             makePayment(cardId: number, businessId: number, paymentValue: number) {
-                - recebe o id do cartão
-                - recebe o id so estabelecimento
-                - recebe o valor do pagamento
-                - realiza o pagamento
+                - recieves card's id
+                - recieves business' id
+                - recieves the value of the payment
+                - makes the payment
             }
 
             getOriginalCardData(cardId: number) {
-                - recebe o id do cartão
-                - busca informações do cartão:
-                    - id do empregado
-                    - nome de registro no cartão
-                    - data de expiração
-                    - tipo do cartão
-                - retorna essas informações
+                - recieves card's id
+                - gets the following card's data:
+                    - employee's id
+                    - name on the card
+                    - expiration date
+                    - type of card
+                - returns the data
             }
 
             deleteCardById(cardId: number) {
-                - recebe o id do cartão
-                - deleta o cartão
+                - recieves card's id
+                - deletes the card
             }
 
             checkIfCardIsVirtual(cardId: number) {
-                - busca o registro do cartão com o id
-                - acessa a propriedade que informa se o cartão é virtual
-                - se for virtual, retorna o erro "virtual_card"
-                - se não for, segue adiante
+                - gets card's data with card's id
+                - checks if the card is virtual
+                - if it is, returns the error "virtual_card" 
+                - if it is not, goes ahead
             } 
 ```
 ```yml
         businessServices.ts
         
             checkBusinessId(id: number) {
-                - recebe o id do estabelecimento
-                - busca o estabelecimento no banco de dados
-                - se não houver resposta, retorna o erro "invalid_business_id"
-                - se houver, segue adiante
+                - recieves business' id
+                - searchs for the register on the database
+                - if there is no register, returns the error "invalid_business_id"
+                - if there is, goes ahead
             }
 ```
 ###### [back to summary](#summary)
