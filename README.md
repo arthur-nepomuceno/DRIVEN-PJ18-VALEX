@@ -13,7 +13,7 @@
 
 ## Start here
 
-:construction: ...building... :construction:
+The goal of this project is to exercise the skill of coding in TypeScript. Part of it's architecture and file structure was given already built. Therefore, on reading this file, the reader will notice that some parts of the code do not have explanation on this document. These parts are precisely those wich were not coded by this developer. For the other cases, the reader will find a straight, detailed and clearer document as possible.
 
 ## Summary
    - [Brief in](#brief-in)
@@ -43,7 +43,17 @@
 ***
 
 ## Concepts and Technologies 
-   :construction: ... em construção ... :construction:
+    - typeScript
+    - nodeJs
+    - nodemon
+    - express
+    - express-async-errors
+    - cors
+    - dotenv
+    - postgreSQL
+    - faker
+    - dayjs
+    - cryptr
 ***
 
 ## Running-the-app
