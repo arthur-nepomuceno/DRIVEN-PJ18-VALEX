@@ -39,7 +39,13 @@
 ***
 
 ## Conceitos e Tecnologias 
-   :construction: ... em construção ... :construction:
+
+:construction:
+
+    - faker
+    - dayjs 
+
+:construction:
 ***
 
 ## Rodando a aplicação
@@ -482,13 +488,13 @@ src
         cardServices.ts
         
             checkApiKey(key: string | string[]){
-                - procura pela chave recebida na base de dados
+                - procura pela chave-da-API na base de dados
                 - se não existir, retorna o erro "invalid_api_key"
                 - se existir, segue adiante
             }
 
             checkEmployeeId(employeeId: number){
-                - procura pelo id na base de dados
+                - procura pelo id do funcionário na base de dados
                 - se não existir, retorna o erro "invalid_user"
                 - se existir, segue adiante
             }
