@@ -191,7 +191,7 @@ PUT /unblock
 
 ```yml
 POST /recharge
-    - Rota para desbloquear um cartão
+    - Rota para recarregar um cartão.
     - headers: {apikey: zadKLNx.DzvOVjQH01TumGl2urPjPQSxUbf67vs0}
     - params: {}
     - query: {}
@@ -287,8 +287,8 @@ src
         cardsController.ts
         
             createCard(req: Request, res: Response) {
-                - recebe a api-key pelo headers
-                - recebe os dados do cartão pelo body
+                - recebe a api-key pelo req.headers
+                - recebe os dados do cartão pelo req.body
                 
                 Serviços:
                     - verifica a api-key
@@ -318,7 +318,7 @@ src
             }
 
             viewEmployeeCards(req: Request, res: Response){
-                - receber id do empregado pela request
+                - receber id do empregado pelo req.body
                 - retornar os cartões desse empregado
 
                 Serviços:
@@ -328,7 +328,7 @@ src
             }
 
             getCardBalance(req: Request, res: Response) {
-                - receber um id de cartão pela request
+                - receber um id de cartão pelo req.body
                 - retornar o saldo do cartão, com lista de pagamentos e recargas
 
                 Serviços:
@@ -339,7 +339,7 @@ src
             }
 
             blockCardById(req: Request, res: Response) {
-                - receber um id e senha de cartão pela request
+                - receber um id e senha de cartão pelo req.body
                 - executar o bloqueio do cartão
 
                 Serviços:
@@ -352,7 +352,7 @@ src
             }
 
             unblockCardById(req: Request, res: Response) {
-                - receber um id e senha de cartão pela request
+                - receber um id e senha de cartão pelo req.body
                 - executar o desbloqueio do cartão
 
                 Serviços:
@@ -365,8 +365,8 @@ src
             }
 
             rechargeCard(req: Request, res: Response) {
-                - receber API key pelo headers
-                - receber id do cartão pelo body
+                - receber API key pelo req.headers
+                - receber id do cartão pelo req.body
 
                 Serviços:
                     - validar a API key
@@ -378,7 +378,7 @@ src
             }
 
             makePayment(req: Request, res: Response) {
-                - receber pelo body da request:
+                - receber pelo req.body:
                     - id do cartão
                     - senha do cartão
                     - id do estabelecimento

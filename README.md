@@ -44,21 +44,21 @@
 ***
 
 ## Running-the-app
-Este projeto foi inicializado com o Node Package Manager, então certifique-se que voce tem a ultima versão estável do [Node.js](https://nodejs.org/en/download/) e [npm](https://www.npmjs.com/) rodando localmente.
+This project was built with Node Package Manager, so be sure you have the last version of [Node.js](https://nodejs.org/en/download/) and [npm](https://www.npmjs.com/) running locally.
 
-Primeiro, faça o clone desse repositório na sua maquina:
+First, clone this repository to your machine:
 
 ```
 git clone https://github.com/arthur-nepomuceno/pj18-valex.git
 ```
 
-Depois, dentro da pasta, rode o seguinte comando para instalar as dependencias.
+After, inside the folder, run the following command to install the dependencies.
 
 ```
 npm install
 ```
 
-Finalizado o processo, é só inicializar o servidor
+To finish the process, you simply start the server.
 ```
 npm run dev
 ```
@@ -69,7 +69,7 @@ npm run dev
 
 ```yml
 POST /cards
-    - Rota para inserir um novo cartão.
+    - Route to insert a new card.
     - headers: {apikey: zadKLNx.DzvOVjQH01TumGl2urPjPQSxUbf67vs0}
     - params: {}
     - query: {}
@@ -91,7 +91,7 @@ POST /cards
 
 ```yml
 POST /cards/:id/activate
-    - Rota para ativar um cartão
+    - Route to activate a card.
     - headers: {}
     - params: { id }
     - query: {}
@@ -105,7 +105,7 @@ POST /cards/:id/activate
 
 ```yml
 GET /cards
-    - Rota para visualizar os cartões de um empregado
+    - Route to visualize all the cards of an employee.
     - headers: {}
     - params: {}
     - body: 
@@ -128,7 +128,7 @@ GET /cards
 
 ```yml
 GET /cards/balance
-    - Rota para visualizar as transações de um cartão (pagamentos e recargas)
+    - Route to visualize the transactions of a card (payments and recharges)
     - headers: {}
     - params: {}
     - query: {}
@@ -164,7 +164,7 @@ GET /cards/balance
 
 ```yml
 PUT /block
-    - Rota para bloquear um cartão
+    - Route to block a card.
     - headers: {}
     - params: {}
     - query: {}
@@ -178,7 +178,7 @@ PUT /block
 
 ```yml
 PUT /unblock
-    - Rota para desbloquear um cartão
+    - Route to unblock a card.
     - headers: {}
     - params: {}
     - query: {}
@@ -192,7 +192,7 @@ PUT /unblock
 
 ```yml
 POST /recharge
-    - Rota para desbloquear um cartão
+    - Route to recharge a card.
     - headers: {apikey: zadKLNx.DzvOVjQH01TumGl2urPjPQSxUbf67vs0}
     - params: {}
     - query: {}
@@ -206,7 +206,7 @@ POST /recharge
 
 ```yml
 POST /payment
-    - Rota para realizar compras no cartão.
+    - Route to make payments with a card.
     - headers: {}
     - params: {}
     - query: {}
@@ -222,7 +222,7 @@ POST /payment
 
 ```yml
 POST /virtual-card
-    - Rota para criar um cartão virtual associado à um cartão físico.
+    - Route to create a virtual card linked with a real card.
     - headers: {}
     - params: {}
     - query: {}
@@ -242,7 +242,7 @@ POST /virtual-card
 
 ```yml
 DELETE /virtual-card
-    - Rota para deletar um cartão virtual.
+    - Route to delete a virtual card.
     - headers: {}
     - params: {}
     - query: {}
@@ -256,7 +256,7 @@ DELETE /virtual-card
 
 ```yml
 POST /online-payment
-    - Rota para realizar compras online.
+    - Route to make online payments.
     - headers: {}
     - params: {}
     - query: {}
@@ -288,167 +288,166 @@ src
         cardsController.ts
         
             createCard(req: Request, res: Response) {
-                - recebe a api-key pelo headers
-                - recebe os dados do cartão pelo body
+                - recieves api-key from req.headers
+                - recieves card's data from req.body
                 
-                Serviços:
-                    - verifica a api-key
-                    - verifica o id do trabalhador
-                    - verifica o tipo do cartão
-                    - gera um número de cartão
-                    - gera um nome para o cartão
-                    - gera uma data de expiração
-                    - gera um código de segurança
-                    - criptografa o código de segurança
-                    - insere os dados no banco de dados
+                Services:
+                    - check api-key
+                    - check employee's id
+                    - check card's type
+                    - generate a card number
+                    - generate a name for the card based on employee's name
+                    - calculate card's expiration date
+                    - generate a secutiry code
+                    - encrypt security code
+                    - insert data on database
             }
 
             activateCard(req: Request, res: Response){
-                - receber id pelo req.params
-                - receber cvc e password pelo req.body
-                - a senha deve ter 4 números
+                - recieves card's id from req.params
+                - recieves security code and password from req.body
+                - password must have 4 numbers
 
-                Serviços:
-                    - verificar se existe um cadastro de cartão com esse id
-                    - verificar se o cartão é virtual
-                    - verificar se o cartão não expirou
-                    - verificar se o cartão já tem senha cadastrada
-                    - verificar código de segurança
-                    - criptografar a senha
-                    - registrar a senha
+                Services:
+                    - check if card's id is real
+                    - check if the card is virtual
+                    - check if the card hasn't expired
+                    - check if the card already has a password registered
+                    - check security code
+                    - encrypt password
+                    - register password on database
             }
 
             viewEmployeeCards(req: Request, res: Response){
-                - receber id do empregado pela request
-                - retornar os cartões desse empregado
+                - recieves employee's id from req.body
+                - returns all cards from this employee
 
-                Serviços:
-                    - buscar os cartões registrados com o id do empregado
-                    - tratar a informação para mostrar o necessário
-                    - descriptografar o código de segurança
+                Services:
+                    - search all cards registered with this employee's id
+                    - format data
+                    - decrypt the secutiry code
             }
 
             getCardBalance(req: Request, res: Response) {
-                - receber um id de cartão pela request
-                - retornar o saldo do cartão, com lista de pagamentos e recargas
+                - recieves a card's id from the req.body
+                - returns the card's balance, with the list of payments and recharges
 
-                Serviços:
-                    - buscar os registros de pagamentos
-                    - buscar os registros de recargas
-                    - calcular o saldo
-                    - retornar as informações no formato correto
+                Services:
+                    - search for the register of payments
+                    - search for the register of recharges
+                    - calculate balance
+                    - format data and return it.
             }
 
             blockCardById(req: Request, res: Response) {
-                - receber um id e senha de cartão pela request
-                - executar o bloqueio do cartão
+                - recieves an id and a password of a card from req.body
+                - blocks the card
 
-                Serviços:
-                    - verificar o id do cartão
-                    - verificar a data de expiração
-                    - verificar se o cartão já está bloqueado
-                    - verificar se a senha fornecida está correta
-                    - bloquear o cartão
-                    - retornar mensagem de sucesso
+                Services:
+                    - check card's id
+                    - check expiration date
+                    - check if card is already blocked
+                    - check password
+                    - block card
+                    - return success message
             }
 
             unblockCardById(req: Request, res: Response) {
-                - receber um id e senha de cartão pela request
-                - executar o desbloqueio do cartão
+                - recieves an id and a password of a card from req.body
+                - unblock card
 
-                Serviços:
-                    - verificar o id do cartão
-                    - verificar a data de expiração
-                    - verificar se o cartão já está desbloqueado
-                    - verificar se a senha fornecida está correta
-                    - desbloquear o cartão
-                    - retornar mensagem de sucesso
+                Services:
+                    - check card's id
+                    - check expiration date
+                    - check if card is already unblocked
+                    - check password
+                    - unblock card
+                    - return success message
             }
 
             rechargeCard(req: Request, res: Response) {
-                - receber API key pelo headers
-                - receber id do cartão pelo body
+                - recieves API key from req.headers
+                - recieves card's id from req.body
 
-                Serviços:
-                    - validar a API key
-                    - validar o id do cartão
-                    - aceitar somente valores de recarga maiores que zero
-                    - verificar se o cartão está ativo
-                    - verificar se o cartão já expirou
-                    - registrar recarga no banco de dados
+                Services:
+                    - check API key
+                    - check card's id
+                    - accept only recharge values bigger than zero
+                    - check if card is active
+                    - check expiration date
+                    - register recharge on database
             }
 
             makePayment(req: Request, res: Response) {
-                - receber pelo body da request:
-                    - id do cartão
-                    - senha do cartão
-                    - id do estabelecimento
-                    - valor do pagamento
+                - recieves from req.body:
+                    - card's id
+                    - card's password
+                    - business' id
+                    - payment value
                 
-                Serviços:
-                    - validar id do cartão
-                    - verificar se o cartão está ativado ou não
-                    - verificar a data de expiração
-                    - verificar se o cartão está bloqueado
-                    - verificar a senha
-                    - verificar o id do estabelecimento
-                    - verificar se o tipo do cartão é compatível 
-                      com o tipo do estabelecimento
-                    - verificar se há saldo suficiente no cartão
-                    - registrar pagamento no banco de dados
+                Services:
+                    - check card's id
+                    - check if card is activated or not
+                    - check expiration date
+                    - check if card is blocked
+                    - check password
+                    - check business' id
+                    - check if card type matches 
+                      business type
+                    - check if card balance is enough
+                    - register payment on database
             }
 
             createVirtualCard(req: Request, res: Response) {
-                - receber pelo body da request:
-                    - id do cartão físico de referência
-                    - senha do cartão físico
+                - recieves from req.body:
+                    - id from the real card, as reference
+                    - password from the real card
 
-                Serviços:
-                    - verificar id do cartão
-                    - verificar senha
-                    - buscar dados do cartão original
-                        - id do empregado
-                        - nome de registro no cartão
-                        - data de expiração
-                        - tipo do cartão
-                    - gerar um número para o novo cartão
-                    - gerar um código de segurança
-                    - criptografar a senha
-                    - criptografar o código de segurança
-                    - inserir cartão no banco de dados
+                Services:
+                    - check card's id
+                    - check password
+                    - get data from the original card:
+                        - employee's id
+                        - name registered on the card
+                        - expiration date
+                        - type of card
+                    - generate new card number
+                    - generate new security code
+                    - encrypt password
+                    - encrypt security code
+                    - insert card on database
             }
 
             deleteVirtualCard(req: Request, res: Response) {
-                - receber pelo body:
-                    - id do cartão virtual que vai ser deletado
-                    - senha do cartão virtual
+                - recieves from req.body:
+                    - id of the virtual card that is going to be deleted
+                    - password of he virtual card
 
-                Serviços:
-                    - verificar id do cartão
-                    - verificar senha
-                    - deletar cartão
+                Services:
+                    - check card's id
+                    - check password
+                    - delete card
             }
 
             makeOnlinePayment(req: Request, res: Response) {
-                - receber pelo body da request:
-                    - id do cartão
-                    - senha do cartão
-                    - id do estabelecimento
-                    - valor do pagamento
+                - recieves from req.body:
+                    - card's id
+                    - card's password
+                    - business' id
+                    - payment value
 
-                - buscar o id do cartão original
+                - searchs for the id of the original card
                 
-                Serviços:
-                    - validar id do cartão
-                    - verificar se o cartão original está ativado ou não
-                    - verificar a data de expiração
-                    - verificar se o cartão está bloqueado
-                    - verificar a senha
-                    - verificar o id do estabelecimento
-                    - verificar se o tipo do cartão é compatível 
-                      com o tipo do estabelecimento
-                    - verificar se há saldo suficiente no cartão
-                    - registrar pagamento no banco de dados
+                Services:
+                    - check card's id
+                    - check if the original card is activated or not
+                    - check expiration date
+                    - check if card is blocked
+                    - check password
+                    - check business' id
+                    - check if card type matches business type
+                    - check if card balance is enough
+                    - register payment on database
             }
 ```
 ```yml            
