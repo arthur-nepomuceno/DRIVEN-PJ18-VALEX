@@ -11,6 +11,10 @@
    <img src="https://img.shields.io/badge/autor-Arthur Nepomuceno-093D04?style=flat-square" />
 </p>
 
+## Comece aqui
+
+Este projeto tem por objetivo o exercício da programação em TypeScript. Parte de sua arquitetura e estrutura de arquivos foi recebida pronta. Por isso, ao ler este arquivo, o leitor irá notar que alguns trechos do código não possuem detalhamento nesta documentação. Estes trechos são justamente aqueles que não foram criados por este desenvolvedor. Para os demais casos, o leitor encontrará uma documentação objetiva, detalhada e o mais clara possível.
+
 ## Sumário
    - [Apresentação](#apresentação)
    - [Introdução](#introdução)
@@ -38,14 +42,19 @@
    
 ***
 
-## Conceitos e Tecnologias 
-
-:construction:
-
+## Conceitos e Tecnologias
+    - typeScript
+    - nodeJs
+    - nodemon
+    - express
+    - express-async-errors
+    - cors
+    - dotenv
+    - postgreSQL
     - faker
-    - dayjs 
+    - dayjs
+    - cryptr
 
-:construction:
 ***
 
 ## Rodando a aplicação
