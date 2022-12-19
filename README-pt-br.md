@@ -1,3 +1,6 @@
+##### **Read in english:**
+[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/arthur-nepomuceno/pj18-valex/blob/main/README.md)
+
 <p align="center">
    <img src="https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/1f355.svg" alt="ValeX" style="width: 89px; height: 89px"/>
 </p>
@@ -7,9 +10,6 @@
 <p align = "center">
    <img src="https://img.shields.io/badge/autor-Arthur Nepomuceno-093D04?style=flat-square" />
 </p>
-
-##### **Read in english:**
-[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/arthur-nepomuceno/pj18-valex/blob/main/README.md)
 
 ## Sumário
    - [Apresentação](#apresentação)
