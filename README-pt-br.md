@@ -1,3 +1,6 @@
+##### **Read in english:**
+[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/arthur-nepomuceno/pj18-valex/blob/main/README.md)
+
 <p align="center">
    <img src="https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/1f355.svg" alt="ValeX" style="width: 89px; height: 89px"/>
 </p>
@@ -8,8 +11,9 @@
    <img src="https://img.shields.io/badge/autor-Arthur Nepomuceno-093D04?style=flat-square" />
 </p>
 
-##### **Read in english:**
-[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/arthur-nepomuceno/pj18-valex/blob/main/README.md)
+## Comece aqui
+
+Este projeto tem por objetivo o exercício da programação em TypeScript. Parte de sua arquitetura e estrutura de arquivos foi recebida pronta. Por isso, ao ler este arquivo, o leitor irá notar que alguns trechos do código não possuem detalhamento nesta documentação. Estes trechos são justamente aqueles que não foram criados por este desenvolvedor. Para os demais casos, o leitor encontrará uma documentação objetiva, detalhada e o mais clara possível.
 
 ## Sumário
    - [Apresentação](#apresentação)
@@ -38,14 +42,19 @@
    
 ***
 
-## Conceitos e Tecnologias 
-
-:construction:
-
+## Conceitos e Tecnologias
+    - typeScript
+    - nodeJs
+    - nodemon
+    - express
+    - express-async-errors
+    - cors
+    - dotenv
+    - postgreSQL
     - faker
-    - dayjs 
+    - dayjs
+    - cryptr
 
-:construction:
 ***
 
 ## Rodando a aplicação

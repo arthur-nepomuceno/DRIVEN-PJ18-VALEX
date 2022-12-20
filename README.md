@@ -13,7 +13,7 @@
 
 ## Start here
 
-:construction: ...building... :construction:
+The goal of this project is to exercise the skill of coding in TypeScript. Part of it's architecture and file structure was given already built. Therefore, on reading this file, the reader will notice that some parts of the code do not have explanation on this document. These parts are precisely those wich were not coded by this developer. For the other cases, the reader will find a straight, detailed and clearer document as possible.
 
 ## Summary
    - [Brief in](#brief-in)
@@ -32,7 +32,7 @@
 ***
 
 ## Introduction
-   This project is coded in TypeScripand with a database previously built. It's elements are:
+   This project is coded in TypeScript and with a database previously built. It's elements are:
    - _companies_: table with the companies to wich the members belong. Each company must have a register key wich allows it to execute every other necessary operation.
    - _employees_: table with the companies' members. A member may have more than one card.
    - _cards_: table of cards, either virtual cards and real cards, varying in type os establishment where they can be used.
@@ -43,7 +43,17 @@
 ***
 
 ## Concepts and Technologies 
-   :construction: ... em construção ... :construction:
+    - typeScript
+    - nodeJs
+    - nodemon
+    - express
+    - express-async-errors
+    - cors
+    - dotenv
+    - postgreSQL
+    - faker
+    - dayjs
+    - cryptr
 ***
 
 ## Running-the-app
